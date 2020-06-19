@@ -14,7 +14,7 @@ const cards = [
 ]
 
 // These two are just helpers, they curate spring data, values that are later being interpolated into css
-const to = i => ({ x: 0, y: i * -4, scale: 1, rot: -15 + Math.random() * 50, delay: i * 100 })
+const to = i => ({ x: 0, y: i * -4, scale: 1, rot: -10 + Math.random() * 30, delay: i * 100 })
 const from = i => ({ x: 0, rot: 0, scale: 2.7, y: -1500 })
 // This is being used down there in the view, it interpolates rotation and scale into a css transform
 const trans = (r, s) => `perspective(1500px) rotateX(30deg) rotateY(${r / 10}deg) rotateZ(${r}deg) scale(${s})`
@@ -30,8 +30,8 @@ function Deck() {
     set(i => {
       if (index !== i) return // We're only interested in changing spring-data for the current spring
       const isGone = gone.has(index)
-      const x = isGone ? (200 + window.innerWidth) * dir : down ? xDelta : 0 // When a card is gone it flys out left or right, otherwise goes back to zero
-      const rot = xDelta / 100 + (isGone ? dir * 70 * velocity : 0) // How much the card tilts, flicking it harder makes it rotate faster
+      const x = isGone ? (500 + window.innerWidth) * dir : down ? xDelta : 0 // When a card is gone it flys out left or right, otherwise goes back to zero
+      const rot = xDelta / 100 + (isGone ? dir * 30 * velocity : 0) // How much the card tilts, flicking it harder makes it rotate faster
       const scale = down ? 1.2 : 1 // Active cards lift up a bit
       return { x, rot, scale, delay: undefined, config: { friction: 50, tension: down ? 800 : isGone ? 200 : 500 } }
     })
